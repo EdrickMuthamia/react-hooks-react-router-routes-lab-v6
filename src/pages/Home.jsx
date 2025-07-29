@@ -6,8 +6,8 @@ function Home() {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/movies")
-      .then((r) => r.json())
+    fetch("/movies")
+      .then((res) => res.json())
       .then(setMovies);
   }, []);
 
@@ -19,7 +19,7 @@ function Home() {
       <main>
         <h1>Home Page</h1>
         {movies.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} />
+          <MovieCard key={movie.id} title={movie.title} id={movie.id} />
         ))}
       </main>
     </>

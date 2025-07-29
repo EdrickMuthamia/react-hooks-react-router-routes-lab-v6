@@ -7,12 +7,15 @@ function Movie() {
   const [movie, setMovie] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/movies/${id}`)
-      .then((r) => r.json())
-      .then(setMovie);
+    fetch("/movies")
+      .then((res) => res.json())
+      .then((movies) => {
+        const found = movies.find((m) => m.id.toString() === id);
+        setMovie(found);
+      });
   }, [id]);
 
-  if (!movie) return <div>Loading...</div>;
+  if (!movie) return <p>Loading...</p>;
 
   return (
     <>
@@ -22,11 +25,12 @@ function Movie() {
       <main>
         <h1>{movie.title}</h1>
         <p>{movie.time}</p>
-        {movie.genres.map((genre, idx) => (
-          <span key={idx}>{genre} </span>
+        {movie.genres.map((g, i) => (
+          <span key={i}>{g}</span>
         ))}
       </main>
     </>
   );
 }
+
 export default Movie;
