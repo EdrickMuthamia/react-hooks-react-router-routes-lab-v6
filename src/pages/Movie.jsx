@@ -15,7 +15,7 @@ function Movie() {
       });
   }, [id]);
 
-  if (!movie) return <p>Loading...</p>;
+  if (!movie) return <div>Loading...</div>;
 
   return (
     <>
@@ -25,7 +25,7 @@ function Movie() {
       <main>
         <h1>{movie.title}</h1>
         <p>{movie.time}</p>
-        {movie.genres.map((g, i) => (
+        {movie.genres && movie.genres.map((g, i) => (
           <span key={i}>{g}</span>
         ))}
       </main>
